@@ -73,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function () {
     tiles.forEach((tile, index) => {
       tile.addEventListener('click', () => {
         const emptyIndex = tiles.findIndex(t => t.classList.contains('empty'));
-        console.log(emptyIndex)
         const rowDiff = Math.abs(Math.floor(index / 4) - Math.floor(emptyIndex / 4));
         const colDiff = Math.abs(index % 4 - emptyIndex % 4);
         if ((rowDiff === 1 && colDiff === 0) || (rowDiff === 0 && colDiff === 1)) {
@@ -81,6 +80,34 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
     });
+    document.addEventListener('keydown', function(event) {
+        const key = event.key; 
+        const emptyIndex = tiles.findIndex(t => t.classList.contains('empty'));
+        switch (key) {
+            case 'ArrowLeft':
+            case 'a':
+            case 'A':
+                swapTiles(emptyIndex,(emptyIndex - 1))
+                break;
+            case 'ArrowUp':
+            case 'w':
+            case 'W':
+                swapTiles(emptyIndex,(emptyIndex - 4))
+                break;
+            case 'ArrowRight':
+            case 'd':
+            case 'D':
+                swapTiles(emptyIndex,(emptyIndex + 1))
+                break;
+            case 'ArrowDown':
+            case 's':
+            case 'S':
+                swapTiles(emptyIndex,(emptyIndex + 4))
+                break;
+        }
+      });
+      
+      
   
     // Add event listener to shuffle button
     document.getElementById('shuffle-btn').addEventListener('click', () => {
@@ -88,3 +115,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
   
+
